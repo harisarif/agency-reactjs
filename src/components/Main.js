@@ -577,6 +577,119 @@ export default function Main() {
 
     </section>
 
+
+
+{/* <!-- blog section start now --> */}
+
+    <section id="blogs" className="blog-section py-5">
+      <div className="container">
+
+        {/* Section Title */}
+        <div className="section-title text-center mb-3">
+          <h2>Our Blogs</h2>
+        </div>
+
+        {/* Blog Grid */}
+        <div className="row g-4">
+
+          {/* Blog Item 1 */}
+          <div className="col-12 col-md-6 col-lg-4">
+            <div className="service-item h-100">
+              <div className="blog-img">
+                <img src="img/blogs/blog-img-1.png" className="img-fluid w-100" alt="Blog 1" />
+              </div>
+              <div className="d-flex align-items-center flex-wrap gap-3 my-3">
+                <a className="fw-bold text-decoration-none">Creative</a>
+                <span className="text-muted small">Oct 12, 2024</span>
+              </div>
+              <h3 className="blog-title fs-5">Latest in Web Development</h3>
+              <p className="mb-0">TechTrack creates responsive, high-performance websites tailored to your brand—built for speed, scalability, and seamless user experiences across all devices.</p>
+            </div>
+          </div>
+
+          {/* Blog Item 2 */}
+          <div className="col-12 col-md-6 col-lg-4">
+            <div className="service-item h-100">
+              <div className="blog-img">
+                <img src="img/blogs/blog-img-2.png" className="img-fluid w-100" alt="Blog 2" />
+              </div>
+              <div className="d-flex align-items-center flex-wrap gap-3 my-3">
+                <a className="fw-bold text-decoration-none">Creative</a>
+                <span className="text-muted small">Oct 12, 2024</span>
+              </div>
+              <h3 className="blog-title fs-5">Tech Insights & Tutorials</h3>
+              <p className="mb-0">TechTrack creates responsive, high-performance websites tailored to your brand—built for speed, scalability, and seamless user experiences across all devices.</p>
+            </div>
+          </div>
+
+          {/* Blog Item 3 */}
+          <div className="col-12 col-md-6 col-lg-4">
+            <div className="service-item h-100">
+              <div className="blog-img">
+                <img src="img/blogs/blog-img-3.png" className="img-fluid w-100" alt="Blog 3" />
+              </div>
+              <div className="d-flex align-items-center flex-wrap gap-3 my-3">
+                <a className="fw-bold text-decoration-none">Creative</a>
+                <span className="text-muted small">Oct 12, 2024</span>
+              </div>
+              <h3 className="blog-title fs-5">Code Smarter: Tips & Tricks</h3>
+              <p className="mb-0">TechTrack creates responsive, high-performance websites tailored to your brand—built for speed, scalability, and seamless user experiences across all devices.</p>
+            </div>
+          </div>
+
+          {/* Blog Item 4 */}
+          <div className="col-12 col-md-6 col-lg-4">
+            <div className="service-item h-100">
+              <div className="blog-img">
+                <img src="img/blogs/blog-img-7.png" className="img-fluid w-100" alt="Blog 4" />
+              </div>
+              <div className="d-flex align-items-center flex-wrap gap-3 my-3">
+                <a className="fw-bold text-decoration-none">Creative</a>
+                <span className="text-muted small">Oct 12, 2024</span>
+              </div>
+              <h3 className="blog-title fs-5">Frameworks & Best Practices</h3>
+              <p className="mb-0">TechTrack creates responsive, high-performance websites tailored to your brand—built for speed, scalability, and seamless user experiences across all devices.</p>
+            </div>
+          </div>
+
+          {/* Blog Item 5 */}
+          <div className="col-12 col-md-6 col-lg-4">
+            <div className="service-item h-100">
+              <div className="blog-img">
+                <img src="img/blogs/blog-img-8.png" className="img-fluid w-100" alt="Blog 5" />
+              </div>
+              <div className="d-flex align-items-center flex-wrap gap-3 my-3">
+                <a className="fw-bold text-decoration-none">Creative</a>
+                <span className="text-muted small">Oct 12, 2024</span>
+              </div>
+              <h3 className="blog-title fs-5">Behind the Code: Dev Stories</h3>
+              <p className="mb-0">TechTrack creates responsive, high-performance websites tailored to your brand—built for speed, scalability, and seamless user experiences across all devices.</p>
+            </div>
+          </div>
+
+          {/* Blog Item 6 */}
+          <div className="col-12 col-md-6 col-lg-4">
+            <div className="service-item h-100">
+              <div className="blog-img">
+                <img src="img/blogs/blog-img-9.png" className="img-fluid w-100" alt="Blog 6" />
+              </div>
+              <div className="d-flex align-items-center flex-wrap gap-3 my-3">
+                <a className="fw-bold text-decoration-none">Creative</a>
+                <span className="text-muted small">Oct 12, 2024</span>
+              </div>
+              <h3 className="blog-title fs-5">Trending Tools & Technologies</h3>
+              <p className="mb-0">TechTrack creates responsive, high-performance websites tailored to your brand—built for speed, scalability, and seamless user experiences across all devices.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+{/* <!-- blog section end now --> */}
+
+
+
     {/* <!-- Pricing Section --> */}
     <section id="pricing" className="pricing section light-background">
 
@@ -913,7 +1026,7 @@ export default function Main() {
       </div>
 
       <div className="container" >
-
+        
         {/* <div className="testimonials-slider swiper init-swiper">
           <script type="application/json" className="swiper-config">
             {
@@ -1108,6 +1221,9 @@ export default function Main() {
       </div>
 
     </section>
+
+          
+
 
     {/* <!-- Contact Section --> */}
     <section id="contact" className="contact section">
