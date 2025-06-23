@@ -1,7 +1,20 @@
-import React from 'react'
 
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 export default function Main() {
+  const [blogs, setBlogs] = useState([]);
+    useEffect(() => {
+      axios.get('http://127.0.0.1:8000/latest-blogs')
+        .then(response => {
+          console.log('adsadsa',response)
+          setBlogs(response.data);
+        })
+        .catch(error => {
+          console.error('Error fetching blogs:', error);
+        });
+    }, []);
   return (   
+    
   <main className="main">
 
     {/* <!-- Hero Section --> */}
@@ -592,96 +605,26 @@ export default function Main() {
         {/* Blog Grid */}
         <div className="row g-4">
 
-          {/* Blog Item 1 */}
-          <div className="col-12 col-md-6 col-lg-4">
+        {blogs.map(blog => (
+          <div key={blog.id} className="col-12 col-md-6 col-lg-4">
             <div className="service-item h-100">
               <div className="blog-img">
-                <img src="img/blogs/blog-img-1.png" className="img-fluid w-100" alt="Blog 1" />
+              {blog.image && (
+                <img src={`http://127.0.0.1:8000/storage/${blog.image}`} className="img-fluid w-100" alt="{blog.title}" />
+              )}
               </div>
               <div className="d-flex align-items-center flex-wrap gap-3 my-3">
                 <a className="fw-bold text-decoration-none">Creative</a>
                 <span className="text-muted small">Oct 12, 2024</span>
               </div>
-              <h3 className="blog-title fs-5">Latest in Web Development</h3>
-              <p className="mb-0">TechTrack creates responsive, high-performance websites tailored to your brand—built for speed, scalability, and seamless user experiences across all devices.</p>
+              <h3 className="blog-title fs-5">{blog.title}</h3>
+              <p className="mb-0">{blog.description?.substring(0, 100)}...</p>
             </div>
           </div>
-
-          {/* Blog Item 2 */}
-          <div className="col-12 col-md-6 col-lg-4">
-            <div className="service-item h-100">
-              <div className="blog-img">
-                <img src="img/blogs/blog-img-2.png" className="img-fluid w-100" alt="Blog 2" />
-              </div>
-              <div className="d-flex align-items-center flex-wrap gap-3 my-3">
-                <a className="fw-bold text-decoration-none">Creative</a>
-                <span className="text-muted small">Oct 12, 2024</span>
-              </div>
-              <h3 className="blog-title fs-5">Tech Insights & Tutorials</h3>
-              <p className="mb-0">TechTrack creates responsive, high-performance websites tailored to your brand—built for speed, scalability, and seamless user experiences across all devices.</p>
-            </div>
-          </div>
-
-          {/* Blog Item 3 */}
-          <div className="col-12 col-md-6 col-lg-4">
-            <div className="service-item h-100">
-              <div className="blog-img">
-                <img src="img/blogs/blog-img-3.png" className="img-fluid w-100" alt="Blog 3" />
-              </div>
-              <div className="d-flex align-items-center flex-wrap gap-3 my-3">
-                <a className="fw-bold text-decoration-none">Creative</a>
-                <span className="text-muted small">Oct 12, 2024</span>
-              </div>
-              <h3 className="blog-title fs-5">Code Smarter: Tips & Tricks</h3>
-              <p className="mb-0">TechTrack creates responsive, high-performance websites tailored to your brand—built for speed, scalability, and seamless user experiences across all devices.</p>
-            </div>
-          </div>
-
-          {/* Blog Item 4 */}
-          <div className="col-12 col-md-6 col-lg-4">
-            <div className="service-item h-100">
-              <div className="blog-img">
-                <img src="img/blogs/blog-img-7.png" className="img-fluid w-100" alt="Blog 4" />
-              </div>
-              <div className="d-flex align-items-center flex-wrap gap-3 my-3">
-                <a className="fw-bold text-decoration-none">Creative</a>
-                <span className="text-muted small">Oct 12, 2024</span>
-              </div>
-              <h3 className="blog-title fs-5">Frameworks & Best Practices</h3>
-              <p className="mb-0">TechTrack creates responsive, high-performance websites tailored to your brand—built for speed, scalability, and seamless user experiences across all devices.</p>
-            </div>
-          </div>
-
-          {/* Blog Item 5 */}
-          <div className="col-12 col-md-6 col-lg-4">
-            <div className="service-item h-100">
-              <div className="blog-img">
-                <img src="img/blogs/blog-img-8.png" className="img-fluid w-100" alt="Blog 5" />
-              </div>
-              <div className="d-flex align-items-center flex-wrap gap-3 my-3">
-                <a className="fw-bold text-decoration-none">Creative</a>
-                <span className="text-muted small">Oct 12, 2024</span>
-              </div>
-              <h3 className="blog-title fs-5">Behind the Code: Dev Stories</h3>
-              <p className="mb-0">TechTrack creates responsive, high-performance websites tailored to your brand—built for speed, scalability, and seamless user experiences across all devices.</p>
-            </div>
-          </div>
-
-          {/* Blog Item 6 */}
-          <div className="col-12 col-md-6 col-lg-4">
-            <div className="service-item h-100">
-              <div className="blog-img">
-                <img src="img/blogs/blog-img-9.png" className="img-fluid w-100" alt="Blog 6" />
-              </div>
-              <div className="d-flex align-items-center flex-wrap gap-3 my-3">
-                <a className="fw-bold text-decoration-none">Creative</a>
-                <span className="text-muted small">Oct 12, 2024</span>
-              </div>
-              <h3 className="blog-title fs-5">Trending Tools & Technologies</h3>
-              <p className="mb-0">TechTrack creates responsive, high-performance websites tailored to your brand—built for speed, scalability, and seamless user experiences across all devices.</p>
-            </div>
-          </div>
-
+          ))}
+        {blogs.length === 0 && (
+                <p className="text-gray-500">No blogs found.</p>
+              )}
         </div>
       </div>
     </section>
