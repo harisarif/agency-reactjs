@@ -29,19 +29,17 @@ export default function Footer() {
             <li><a href="#">Home</a></li>
             <li><a href="#">About us</a></li>
             <li><a href="#">Services</a></li>
-            <li><a href="#">Terms of service</a></li>
-            <li><a href="#">Privacy policy</a></li>
           </ul>
         </div>
 
         <div className="col-lg-3 col-md-3 footer-links">
           <h4>Our Services</h4>
           <ul>
-            <li><a href="#">Web Design</a></li>
-            <li><a href="#">Web Development</a></li>
-            <li><a href="#">Product Management</a></li>
-            <li><a href="#">Marketing</a></li>
-            <li><a href="#">Graphic Design</a></li>
+            <li><a>Web Design</a></li>
+            <li><a>Web Development</a></li>
+            <li><a>Product Management</a></li>
+            <li><a>Marketing</a></li>
+            <li><a>Graphic Design</a></li>
           </ul>
         </div>
 
@@ -53,9 +51,9 @@ export default function Footer() {
     </div>
 
     <div className="container copyright text-center mt-4">
-      <p>© <span>Copyright</span> <strong className="px-1 sitename">MyWebsite</strong> <span>All Rights Reserved</span></p>
+      <p>© <span>Copyright</span> <strong className="px-1 sitename">Corex</strong> <span>All Rights Reserved</span></p>
       <div className="credits">
-        <a href="https://bootstrapmade.com/">BootstrapMade</a>
+        <a href="https://techtrack.online/">TechTrack</a>
       </div>
     </div>
 

@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Accordion } from 'react-bootstrap';
+import { Accordion } from "react-bootstrap";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay, Pagination } from "swiper/modules";
+
 export default function Main() {
   const [blogs, setBlogs] = useState([]);
   useEffect(() => {
@@ -21,6 +24,45 @@ export default function Main() {
     setActiveIndex((prevIndex) => (prevIndex === index ? null : index));
   };
 
+  const testimonials = [
+    {
+      text: `Working with this agency was a fantastic experience. Their team delivered exactly what we needed with incredible attention to detail and professionalism. We’re already seeing the impact on our campaigns.`,
+      name: "Robert Johnson",
+      title: "Marketing Director",
+      image: "img/person/person-m-8.webp",
+    },
+    {
+      text: `The level of creativity and technical expertise this team brings is unmatched. They understood our goals and transformed them into a user-friendly, beautiful product. Highly recommend their services to any growing business.`,
+      name: "Lisa Williams",
+      title: "Product Manager",
+      image: "img/person/person-f-3.webp",
+    },
+    {
+      text: `From strategy to execution, the entire project was handled seamlessly. The design was top-notch, communication was clear, and everything launched on time. We’ll definitely work with them again in the future.`,
+      name: "Emma Parker",
+      title: "UX Designer",
+      image: "img/person/person-f-10.webp",
+    },
+    {
+      text: `This agency goes above and beyond. They brought our vision to life with a modern design and smooth functionality. Their support team was always available to help and guide us throughout the process.`,
+      name: "David Miller",
+      title: "Senior Developer",
+      image: "img/person/person-m-5.webp",
+    },
+    {
+      text: `They truly care about your success. Our brand identity and online presence have improved dramatically thanks to their thoughtful and well-executed strategies. We’re extremely pleased with the results so far.`,
+      name: "Michael Davis",
+      title: "CEO & Founder",
+      image: "img/person/person-m-2.webp",
+    },
+    {
+      text: `Impressive from start to finish. Their attention to brand storytelling, user experience, and visual design helped us stand out. The entire experience was smooth, and we’re thrilled with the final product.`,
+      name: "Sarah Thompson",
+      title: "Art Director",
+      image: "img/person/person-f-7.webp",
+    },
+  ];
+
   const faqData = [
     {
       question: "Vivamus suscipit tortor eget felis porttitor volutpat?",
@@ -37,7 +79,82 @@ export default function Main() {
       answer:
         "Curabitur non nulla sit amet nisl tempus convallis quis ac lectus. Praesent sapien massa.",
     },
+
+    {
+      question: "Sed porttitor lectus nibh ullamcorper sit amet?",
+      answer:
+        "Curabitur non nulla sit amet nisl tempus convallis quis ac lectus. Praesent sapien massa.",
+    },
+
+    {
+      question: "Sed porttitor lectus nibh ullamcorper sit amet?",
+      answer:
+        "Curabitur non nulla sit amet nisl tempus convallis quis ac lectus. Praesent sapien massa.",
+    },
   ];
+
+  const filters = [
+    { label: "All Work", value: "*" },
+    { label: "Web Design", value: "web" },
+    { label: "Graphics", value: "graphics" },
+    { label: "Motion", value: "motion" },
+    { label: "Branding", value: "brand" },
+  ];
+
+  const portfolioItems = [
+    {
+      id: 1,
+      category: "web",
+      title: "Modern Dashboard Interface",
+      img: "/img/portfolio/portfolio-1.webp",
+      description:
+        "Maecenas faucibus mollis interdum sed posuere consectetur est at lobortis.",
+    },
+    {
+      id: 2,
+      category: "graphics",
+      title: "Creative Brand Identity",
+      img: "/img/portfolio/portfolio-10.webp",
+      description:
+        "Vestibulum id ligula porta felis euismod semper at vulputate.",
+    },
+    {
+      id: 3,
+      category: "motion",
+      title: "Product Animation Reel",
+      img: "/img/portfolio/portfolio-7.webp",
+      description:
+        "Donec ullamcorper nulla non metus auctor fringilla dapibus.",
+    },
+    {
+      id: 4,
+      category: "brand",
+      title: "Luxury Brand Package",
+      img: "/img/portfolio/portfolio-4.webp",
+      description: "Aenean lacinia bibendum nulla sed consectetur elit.",
+    },
+    {
+      id: 5,
+      category: "web",
+      title: "E-commerce Platform",
+      img: "/img/portfolio/portfolio-2.webp",
+      description: "Nullam id dolor id nibh ultricies vehicula ut id elit.",
+    },
+    {
+      id: 6,
+      category: "graphics",
+      title: "Digital Art Collection",
+      img: "/img/portfolio/portfolio-11.webp",
+      description: "Cras mattis consectetur purus sit amet fermentum.",
+    },
+  ];
+
+  const [activeFilter, setActiveFilter] = useState("*");
+
+  const filteredItems =
+    activeFilter === "*"
+      ? portfolioItems
+      : portfolioItems.filter((item) => item.category === activeFilter);
   return (
     <main className="main">
       {/* <!-- Hero Section --> */}
@@ -59,15 +176,11 @@ export default function Main() {
               </h1>
 
               <p className="hero-description mb-4">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Maecenas varius tortor nibh, sit amet tempor nibh finibus et.
-                Aenean eu enim justo.
+               Empowering businesses with tailored tech solutions. We drive success by combining strategy, creativity, and modern development tools.
               </p>
 
               <div className="cta-wrapper">
-                <a href="#" className="btn btn-primary">
-                  Discover More
-                </a>
+                <a className="btn btn-primary">Discover More</a>
               </div>
             </div>
 
@@ -92,8 +205,7 @@ export default function Main() {
                 <div className="feature-content">
                   <h3 className="feature-title">Rapid Deployment</h3>
                   <p className="feature-text">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut
-                    elit tellus, luctus nec ullamcorper mattis.
+                    Accelerate your project launch with our agile workflow, delivering efficient and timely solutions tailored to your business
                   </p>
                 </div>
               </div>
@@ -107,8 +219,7 @@ export default function Main() {
                 <div className="feature-content">
                   <h3 className="feature-title">Advanced Security</h3>
                   <p className="feature-text">
-                    Duis aute irure dolor in reprehenderit in voluptate velit
-                    esse cillum dolore eu fugiat nulla pariatur.
+                   We implement cutting-edge security protocols to protect your data, ensuring confidentiality, integrity, and peace of mind.
                   </p>
                 </div>
               </div>
@@ -122,8 +233,7 @@ export default function Main() {
                 <div className="feature-content">
                   <h3 className="feature-title">Dedicated Support</h3>
                   <p className="feature-text">
-                    Excepteur sint occaecat cupidatat non proident, sunt in
-                    culpa qui officia deserunt mollit anim id est laborum.
+                    Our expert team is always ready to assist you with timely solutions, ensuring smooth operations and client satisfaction.
                   </p>
                 </div>
               </div>
@@ -136,40 +246,38 @@ export default function Main() {
       <section id="about" className="about section">
         <div className="container">
           <div className="row gy-4">
-            <div className="col-lg-6 content">
-              <p className="who-we-are">Who We Are</p>
-              <h3>Unleashing Potential with Creative Strategy</h3>
-              <p className="fst-italic">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua.
-              </p>
-              <ul>
-                <li>
-                  <i className="bi bi-check-circle"></i>{" "}
-                  <span>
-                    Ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                  </span>
-                </li>
-                <li>
-                  <i className="bi bi-check-circle"></i>{" "}
-                  <span>
-                    Duis aute irure dolor in reprehenderit in voluptate velit.
-                  </span>
-                </li>
-                <li>
-                  <i className="bi bi-check-circle"></i>{" "}
-                  <span>
-                    Ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                    Duis aute irure dolor in reprehenderit in voluptate trideta
-                    storacalaperda mastiro dolore eu fugiat nulla pariatur.
-                  </span>
-                </li>
-              </ul>
-              <a href="#" className="read-more">
-                <span>Read More</span>
-                <i className="bi bi-arrow-right"></i>
-              </a>
-            </div>
+           <div className="col-lg-6 content">
+  <p className="who-we-are">Who We Are</p>
+  <h3>Empowering Brands Through Innovation & Strategy</h3>
+  <p className="fst-italic">
+    At WPCorex, we specialize in delivering innovative digital solutions that drive real results. Our team blends creativity, technology, and strategy to bring your ideas to life.
+  </p>
+  <ul>
+    <li>
+      <i className="bi bi-check-circle"></i>{" "}
+      <span>
+        Customized web and mobile solutions tailored to your business needs.
+      </span>
+    </li>
+    <li>
+      <i className="bi bi-check-circle"></i>{" "}
+      <span>
+        Data-driven strategies designed to increase engagement and conversions.
+      </span>
+    </li>
+    <li>
+      <i className="bi bi-check-circle"></i>{" "}
+      <span>
+        Ongoing support and optimization to ensure your digital presence thrives across platforms and devices.
+      </span>
+    </li>
+  </ul>
+  <a className="read-more">
+    <span>Read More</span>
+    <i className="bi bi-arrow-right"></i>
+  </a>
+</div>
+
 
             <div className="col-lg-6 about-images">
               <div className="row gy-4">
@@ -210,8 +318,7 @@ export default function Main() {
         <div className="container section-title">
           <h2>How We Work</h2>
           <p>
-            Necessitatibus eius consequatur ex aliquid fuga eum quidem sint
-            consectetur velit
+           We follow a client-focused approach built on strategy, innovation, and consistent results.
           </p>
         </div>
 
@@ -228,8 +335,7 @@ export default function Main() {
                     <div className="step-content">
                       <h3>Project Planning</h3>
                       <p>
-                        Aenean vulputate eleifend tellus. Aenean leo ligula,
-                        porttitor eu, consequat vitae, eleifend ac, enim.
+                        We outline every step with clarity. Project goals, timelines, and resources are mapped to ensure smooth delivery.
                       </p>
                     </div>
                   </div>
@@ -245,8 +351,7 @@ export default function Main() {
                     <div className="step-content">
                       <h3>Development Phase</h3>
                       <p>
-                        Donec vitae sapien ut libero venenatis faucibus. Nullam
-                        quis ante. Etiam sit amet orci eget eros faucibus.
+                       Our team brings ideas to life with clean code, agile workflows, and continuous testing to ensure high-quality results.
                       </p>
                     </div>
                   </div>
@@ -263,8 +368,7 @@ export default function Main() {
                     <div className="step-content">
                       <h3>Testing &amp; QA</h3>
                       <p>
-                        Phasellus ullamcorper ipsum rutrum nunc. Nunc nonummy
-                        metus. Vestibulum volutpat pretium libero.
+                        Every component is thoroughly tested to ensure flawless performance, security, and compatibility across all platforms.
                       </p>
                     </div>
                   </div>
@@ -281,8 +385,7 @@ export default function Main() {
                     <div className="step-content">
                       <h3>Launch &amp; Support</h3>
                       <p>
-                        Nam quam nunc, blandit vel, luctus pulvinar, hendrerit
-                        id, lorem. Maecenas nec odio et ante tincidunt.
+                       We ensure a smooth launch followed by continuous support and maintenance to keep your project optimized and running flawlessly.
                       </p>
                     </div>
                   </div>
@@ -299,8 +402,7 @@ export default function Main() {
         <div className="container section-title">
           <h2>Services</h2>
           <p>
-            Necessitatibus eius consequatur ex aliquid fuga eum quidem sint
-            consectetur velit
+           Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit
           </p>
         </div>
 
@@ -314,12 +416,11 @@ export default function Main() {
                 <div className="service-content">
                   <h3>Custom Web Development</h3>
                   <p>
-                    Curabitur arcu erat, accumsan id imperdiet et, porttitor at
-                    sem. Nulla quis lorem ut libero malesuada feugiat. Curabitur
-                    non nulla sit amet nisl tempus convallis. Lorem ipsum dolor
-                    sit amet, consectetur adipiscing elit.
+                    Build dynamic, responsive, and scalable websites tailored to your brand.  
+Our custom web solutions ensure optimal performance, user engagement,  
+and seamless integration with the latest technologies.
                   </p>
-                  <a href="#" className="service-link">
+                  <a className="service-link">
                     <span>Learn More</span>
                     <i className="bi bi-arrow-right"></i>
                   </a>
@@ -335,12 +436,11 @@ export default function Main() {
                 <div className="service-content">
                   <h3>Mobile App Solutions</h3>
                   <p>
-                    Praesent sapien massa, convallis a pellentesque nec, egestas
-                    non nisi. Vivamus magna justo, lacinia eget consectetur sed.
-                    Quisque velit nisi, pretium ut lacinia in, elementum id
-                    enim. Donec rutrum congue leo eget malesuada.
+                Delivering seamless mobile experiences tailored to your business needs.  
+From concept to launch, we build fast, scalable, and user-friendly mobile  
+apps that engage users and drive real results across platforms.
                   </p>
-                  <a href="#" className="service-link">
+                  <a className="service-link">
                     <span>Learn More</span>
                     <i className="bi bi-arrow-right"></i>
                   </a>
@@ -356,12 +456,11 @@ export default function Main() {
                 <div className="service-content">
                   <h3>UI/UX Design</h3>
                   <p>
-                    Pellentesque in ipsum id orci porta dapibus. Proin eget
-                    tortor risus. Vivamus suscipit tortor eget felis porttitor
-                    volutpat. Vestibulum ac diam sit amet quam vehicula
-                    elementum sed sit amet dui.
+                    Enhance user engagement through intuitive design. We craft seamless  
+interfaces and user experiences that prioritize functionality, usability,  
+and visual consistency across all digital platforms.
                   </p>
-                  <a href="#" className="service-link">
+                  <a className="service-link">
                     <span>Learn More</span>
                     <i className="bi bi-arrow-right"></i>
                   </a>
@@ -377,12 +476,11 @@ export default function Main() {
                 <div className="service-content">
                   <h3>Digital Marketing</h3>
                   <p>
-                    Donec rutrum congue leo eget malesuada. Mauris blandit
-                    aliquet elit, eget tincidunt nibh pulvinar a. Nulla
-                    porttitor accumsan tincidunt. Curabitur aliquet quam id dui
-                    posuere blandit.
+                   Empower your brand through data-driven strategies. Boost engagement  
+and conversions with SEO, PPC, and targeted campaigns designed to  
+deliver measurable growth across digital platforms.
                   </p>
-                  <a href="#" className="service-link">
+                  <a className="service-link">
                     <span>Learn More</span>
                     <i className="bi bi-arrow-right"></i>
                   </a>
@@ -436,14 +534,15 @@ export default function Main() {
                   Our customers excel in technology management
                 </h2>
                 <p className="description">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Vestibulum tincidunt diam et gravida consequat. Sed nec mauris
-                  quis lacus commodo lobortis. Suspendisse euismod commodo sem,
-                  in finibus purus bibendum et. Morbi eu neque sed velit
-                  convallis vestibulum a vel odio.
+                  At WPCorex, we empower businesses to lead through digital
+                  innovation. Our tailored solutions help clients streamline
+                  operations, boost efficiency, and stay ahead in a competitive
+                  landscape. With our expert support, organizations build
+                  smarter workflows and gain the confidence to scale with
+                  reliability, precision, and future-ready technologies.
                 </p>
                 <div className="button-wrapper">
-                  <a className="btn" href="services.html">
+                  <a className="btn">
                     <span>Explore All Services</span>
                   </a>
                 </div>
@@ -457,9 +556,11 @@ export default function Main() {
                   </div>
                   <div className="service-content">
                     <h4>
-                      <a href="service-details.html">Software Engineering</a>
+                      <a>Software Engineering</a>
                     </h4>
-                    <p>Lorem ipsum dolor sit amet consectetur adipiscing.</p>
+                    <p>
+                      Empowering digital solutions through expert development.
+                    </p>
                   </div>
                 </div>
 
@@ -469,9 +570,11 @@ export default function Main() {
                   </div>
                   <div className="service-content">
                     <h4>
-                      <a href="service-details.html">Business Analytics</a>
+                      <a>Business Analytics</a>
                     </h4>
-                    <p>Lorem ipsum dolor sit amet consectetur adipiscing.</p>
+                    <p>
+                      Unlocking data insights to drive smarter decisions daily.
+                    </p>
                   </div>
                 </div>
 
@@ -481,9 +584,11 @@ export default function Main() {
                   </div>
                   <div className="service-content">
                     <h4>
-                      <a href="service-details.html">Mobile Solutions</a>
+                      <a>Mobile Solutions</a>
                     </h4>
-                    <p>Lorem ipsum dolor sit amet consectetur adipiscing.</p>
+                    <p>
+                      Crafting seamless apps that connect and empower users.
+                    </p>
                   </div>
                 </div>
 
@@ -493,9 +598,11 @@ export default function Main() {
                   </div>
                   <div className="service-content">
                     <h4>
-                      <a href="service-details.html">Tech Infrastructure</a>
+                      <a>Tech Infrastructure</a>
                     </h4>
-                    <p>Lorem ipsum dolor sit amet consectetur adipiscing.</p>
+                    <p>
+                      Building scalable systems that power digital innovation.
+                    </p>
                   </div>
                 </div>
               </div>
@@ -524,35 +631,31 @@ export default function Main() {
 
             <div className="col-lg-6">
               <div className="cta-content">
-                <h2>Transform Your Vision Into Reality Today</h2>
+                <h2>Empower Your Business with Expert Digital Solutions</h2>
                 <p className="lead">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut
-                  elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus
-                  leo.
+                  Ready to take your brand to the next level? We deliver
+                  cutting-edge websites, seamless user experiences, and tailored
+                  strategies that drive real results.
                 </p>
 
                 <div className="cta-features">
                   <div className="feature-item">
                     <i className="bi bi-check-circle-fill"></i>
-                    <span>Lorem ipsum dolor sit amet consectetur</span>
+                    <span>Custom Website Design & Development</span>
                   </div>
                   <div className="feature-item">
                     <i className="bi bi-check-circle-fill"></i>
-                    <span>Praesent eget risus vitae massa</span>
+                    <span>SEO Optimization & Digital Marketing</span>
                   </div>
                   <div className="feature-item">
                     <i className="bi bi-check-circle-fill"></i>
-                    <span>Aenean pretium nisi vel pulvinar</span>
+                    <span>Reliable Support & Ongoing Maintenance</span>
                   </div>
                 </div>
 
                 <div className="cta-action mt-5">
-                  <a href="#" className="btn btn-primary btn-lg me-3">
-                    Get Started
-                  </a>
-                  <a href="#" className="btn btn-outline-primary btn-lg">
-                    Learn More
-                  </a>
+                  <a className="btn btn-primary btn-lg me-3">Get Started</a>
+                  <a className="btn btn-outline-primary btn-lg">Learn More</a>
                 </div>
               </div>
             </div>
@@ -562,250 +665,71 @@ export default function Main() {
 
       {/* <!-- Portfolio Section --> */}
       <section id="portfolio" className="portfolio section">
-        {/* <!-- Section Title --> */}
         <div className="container section-title">
           <h2>Portfolio</h2>
           <p>
-            Necessitatibus eius consequatur ex aliquid fuga eum quidem sint
-            consectetur velit
+            Explore our crafted projects built with precision, passion, and
+            creative expertise.
           </p>
         </div>
 
         <div className="container">
-          <div className="isotope-layout">
-            <div className="portfolio-filters-container">
-              <ul className="portfolio-filters isotope-filters">
-                <li data-filter="*" className="filter-active">
-                  All Work
+          <div className="portfolio-filters-container">
+            <ul className="portfolio-filters">
+              {filters.map((filter) => (
+                <li
+                  key={filter.value}
+                  className={
+                    activeFilter === filter.value ? "filter-active" : ""
+                  }
+                  onClick={() => setActiveFilter(filter.value)}
+                >
+                  {filter.label}
                 </li>
-                <li data-filter=".filter-web">Web Design</li>
-                <li data-filter=".filter-graphics">Graphics</li>
-                <li data-filter=".filter-motion">Motion</li>
-                <li data-filter=".filter-brand">Branding</li>
-              </ul>
-            </div>
+              ))}
+            </ul>
+          </div>
 
-            <div className="row g-4 isotope-container">
-              <div className="col-lg-6 col-md-6 portfolio-item isotope-item filter-web">
+          <div className="row g-4">
+            {filteredItems.map((item) => (
+              <div className="col-lg-6 col-md-6 portfolio-item" key={item.id}>
                 <div className="portfolio-card">
                   <div className="portfolio-image">
                     <img
-                      src="/img/portfolio/portfolio-1.webp"
+                      src={item.img}
                       className="img-fluid"
-                      alt=""
+                      alt={item.title}
                       loading="lazy"
                     />
                     <div className="portfolio-overlay">
                       <div className="portfolio-actions">
                         <a
-                          href="/img/portfolio/portfolio-1.webp"
+                          href={item.img}
                           className="glightbox preview-link"
-                          data-gallery="portfolio-gallery-web"
+                          data-gallery={`portfolio-gallery-${item.category}`}
                         >
                           <i className="bi bi-eye"></i>
                         </a>
-                        <a
-                          href="portfolio-details.html"
-                          className="details-link"
-                        >
+                        <a className="details-link">
                           <i className="bi bi-arrow-right"></i>
                         </a>
                       </div>
                     </div>
                   </div>
                   <div className="portfolio-content">
-                    <span className="category">Web Design</span>
-                    <h3>Modern Dashboard Interface</h3>
-                    <p>
-                      Maecenas faucibus mollis interdum sed posuere consectetur
-                      est at lobortis.
-                    </p>
+                    <span className="category">{item.category}</span>
+                    <h3>{item.title}</h3>
+                    <p>{item.description}</p>
                   </div>
                 </div>
               </div>
-
-              <div className="col-lg-6 col-md-6 portfolio-item isotope-item filter-graphics">
-                <div className="portfolio-card">
-                  <div className="portfolio-image">
-                    <img
-                      src="/img/portfolio/portfolio-10.webp"
-                      className="img-fluid"
-                      alt=""
-                      loading="lazy"
-                    />
-                    <div className="portfolio-overlay">
-                      <div className="portfolio-actions">
-                        <a
-                          href="/img/portfolio/portfolio-10.webp"
-                          className="glightbox preview-link"
-                          data-gallery="portfolio-gallery-graphics"
-                        >
-                          <i className="bi bi-eye"></i>
-                        </a>
-                        <a
-                          href="portfolio-details.html"
-                          className="details-link"
-                        >
-                          <i className="bi bi-arrow-right"></i>
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="portfolio-content">
-                    <span className="category">Graphics</span>
-                    <h3>Creative Brand Identity</h3>
-                    <p>
-                      Vestibulum id ligula porta felis euismod semper at
-                      vulputate.
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="col-lg-6 col-md-6 portfolio-item isotope-item filter-motion">
-                <div className="portfolio-card">
-                  <div className="portfolio-image">
-                    <img
-                      src="/img/portfolio/portfolio-7.webp"
-                      className="img-fluid"
-                      alt=""
-                      loading="lazy"
-                    />
-                    <div className="portfolio-overlay">
-                      <div className="portfolio-actions">
-                        <a
-                          href="/img/portfolio/portfolio-7.webp"
-                          className="glightbox preview-link"
-                          data-gallery="portfolio-gallery-motion"
-                        >
-                          <i className="bi bi-eye"></i>
-                        </a>
-                        <a
-                          href="portfolio-details.html"
-                          className="details-link"
-                        >
-                          <i className="bi bi-arrow-right"></i>
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="portfolio-content">
-                    <span className="category">Motion</span>
-                    <h3>Product Animation Reel</h3>
-                    <p>
-                      Donec ullamcorper nulla non metus auctor fringilla
-                      dapibus.
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div className="col-lg-6 col-md-6 portfolio-item isotope-item filter-brand">
-                <div className="portfolio-card">
-                  <div className="portfolio-image">
-                    <img
-                      src="/img/portfolio/portfolio-4.webp"
-                      className="img-fluid"
-                      alt=""
-                      loading="lazy"
-                    />
-                    <div className="portfolio-overlay">
-                      <div className="portfolio-actions">
-                        <a
-                          href="/img/portfolio/portfolio-4.webp"
-                          className="glightbox preview-link"
-                          data-gallery="portfolio-gallery-brand"
-                        >
-                          <i className="bi bi-eye"></i>
-                        </a>
-                        <a
-                          href="portfolio-details.html"
-                          className="details-link"
-                        >
-                          <i className="bi bi-arrow-right"></i>
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="portfolio-content">
-                    <span className="category">Branding</span>
-                    <h3>Luxury Brand Package</h3>
-                    <p>Aenean lacinia bibendum nulla sed consectetur elit.</p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="col-lg-6 col-md-6 portfolio-item isotope-item filter-web">
-                <div className="portfolio-card">
-                  <div className="portfolio-image">
-                    <img
-                      src="/img/portfolio/portfolio-2.webp"
-                      className="img-fluid"
-                      alt=""
-                      loading="lazy"
-                    />
-                    <div className="portfolio-overlay">
-                      <div className="portfolio-actions">
-                        <a
-                          href="/img/portfolio/portfolio-2.webp"
-                          className="glightbox preview-link"
-                          data-gallery="portfolio-gallery-web"
-                        >
-                          <i className="bi bi-eye"></i>
-                        </a>
-                        <a
-                          href="portfolio-details.html"
-                          className="details-link"
-                        >
-                          <i className="bi bi-arrow-right"></i>
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="portfolio-content">
-                    <span className="category">Web Design</span>
-                    <h3>E-commerce Platform</h3>
-                    <p>
-                      Nullam id dolor id nibh ultricies vehicula ut id elit.
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="col-lg-6 col-md-6 portfolio-item isotope-item filter-graphics">
-                <div className="portfolio-card">
-                  <div className="portfolio-image">
-                    <img
-                      src="/img/portfolio/portfolio-11.webp"
-                      className="img-fluid"
-                      alt=""
-                      loading="lazy"
-                    />
-                    <div className="portfolio-overlay">
-                      <div className="portfolio-actions">
-                        <a
-                          href="/img/portfolio/portfolio-11.webp"
-                          className="glightbox preview-link"
-                          data-gallery="portfolio-gallery-graphics"
-                        >
-                          <i className="bi bi-eye"></i>
-                        </a>
-                        <a
-                          href="portfolio-details.html"
-                          className="details-link"
-                        >
-                          <i className="bi bi-arrow-right"></i>
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="portfolio-content">
-                    <span className="category">Graphics</span>
-                    <h3>Digital Art Collection</h3>
-                    <p>Cras mattis consectetur purus sit amet fermentum.</p>
-                  </div>
-                </div>
-              </div>
-            </div>
+            ))}
+            {filteredItems.length === 0 && (
+              <>
+                <img src="" />
+                <p>No items match this filter.</p>
+              </>
+            )}
           </div>
         </div>
       </section>
@@ -823,7 +747,7 @@ export default function Main() {
           <div className="row g-4">
             {blogs.map((blog) => (
               <div key={blog.id} className="col-12 col-md-6 col-lg-4">
-                <div className="service-item h-100">
+                <div className="blog-item h-100">
                   <div className="blog-img rounded-5 overflow-hidden">
                     {blog.image && (
                       <img
@@ -861,8 +785,8 @@ export default function Main() {
         <div className="container section-title">
           <h2>Pricing</h2>
           <p>
-            Necessitatibus eius consequatur ex aliquid fuga eum quidem sint
-            consectetur velit
+            Delivering powerful digital solutions with creativity, strategy, and
+            seamless execution
           </p>
           {/* </div><!-- End Section Title --> */}
 
@@ -871,35 +795,35 @@ export default function Main() {
               {/* <!-- Basic Plan --> */}
               <div className="col-lg-4">
                 <div className="pricing-card">
-                  <h3>Basic Plan</h3>
+                  <h3>Starter Plan</h3>
                   <div className="price">
                     <span className="currency">$</span>
-                    <span className="amount">9.9</span>
+                    <span className="amount">49</span>
                     <span className="period">/ month</span>
                   </div>
                   <p className="description">
-                    Sed ut perspiciatis unde omnis iste natus error sit
-                    voluptatem accusantium doloremque laudantium totam.
+                    Ideal for startups and small businesses looking to build a
+                    strong online presence with essential digital services.
                   </p>
 
-                  <h4>Featured Included:</h4>
+                  <h4>Features Included:</h4>
                   <ul className="features-list">
                     <li>
                       <i className="bi bi-check-circle-fill"></i>
-                      Duis aute irure dolor
+                      Custom 1-page website
                     </li>
                     <li>
                       <i className="bi bi-check-circle-fill"></i>
-                      Excepteur sint occaecat
+                      Basic SEO optimization
                     </li>
                     <li>
                       <i className="bi bi-check-circle-fill"></i>
-                      Nemo enim ipsam voluptatem
+                      Branding consultation
                     </li>
                   </ul>
 
-                  <a href="#" className="btn btn-primary">
-                    Buy Now
+                  <a className="btn btn-primary">
+                    Get Started
                     <i className="bi bi-arrow-right"></i>
                   </a>
                 </div>
@@ -909,39 +833,39 @@ export default function Main() {
               <div className="col-lg-4">
                 <div className="pricing-card popular">
                   <div className="popular-badge">Most Popular</div>
-                  <h3>Standard Plan</h3>
+                  <h3>Professional Plan</h3>
                   <div className="price">
                     <span className="currency">$</span>
-                    <span className="amount">19.9</span>
+                    <span className="amount">99</span>
                     <span className="period">/ month</span>
                   </div>
                   <p className="description">
-                    At vero eos et accusamus et iusto odio dignissimos ducimus
-                    qui blanditiis praesentium voluptatum.
+                    Perfect for growing businesses looking to scale with
+                    advanced web and digital marketing solutions.
                   </p>
 
-                  <h4>Featured Included:</h4>
+                  <h4>Features Included:</h4>
                   <ul className="features-list">
                     <li>
                       <i className="bi bi-check-circle-fill"></i>
-                      Lorem ipsum dolor sit amet
+                      Multi-page responsive website
                     </li>
                     <li>
                       <i className="bi bi-check-circle-fill"></i>
-                      Consectetur adipiscing elit
+                      SEO & speed optimization
                     </li>
                     <li>
                       <i className="bi bi-check-circle-fill"></i>
-                      Sed do eiusmod tempor
+                      Social media setup & integration
                     </li>
                     <li>
                       <i className="bi bi-check-circle-fill"></i>
-                      Ut labore et dolore magna
+                      Monthly performance reports
                     </li>
                   </ul>
 
-                  <a href="#" className="btn btn-light">
-                    Buy Now
+                  <a className="btn btn-light">
+                    Get Started
                     <i className="bi bi-arrow-right"></i>
                   </a>
                 </div>
@@ -953,39 +877,39 @@ export default function Main() {
                   <h3>Premium Plan</h3>
                   <div className="price">
                     <span className="currency">$</span>
-                    <span className="amount">39.9</span>
+                    <span className="amount">199</span>
                     <span className="period">/ month</span>
                   </div>
                   <p className="description">
-                    Quis autem vel eum iure reprehenderit qui in ea voluptate
-                    velit esse quam nihil molestiae.
+                    Ideal for enterprises needing full-scale digital
+                    transformation and dedicated project support.
                   </p>
 
-                  <h4>Featured Included:</h4>
+                  <h4>Features Included:</h4>
                   <ul className="features-list">
                     <li>
                       <i className="bi bi-check-circle-fill"></i>
-                      Temporibus autem quibusdam
+                      Custom web development & redesign
                     </li>
                     <li>
                       <i className="bi bi-check-circle-fill"></i>
-                      Saepe eveniet ut et voluptates
+                      Advanced SEO and analytics setup
                     </li>
                     <li>
                       <i className="bi bi-check-circle-fill"></i>
-                      Nam libero tempore soluta
+                      Social media strategy & ad campaigns
                     </li>
                     <li>
                       <i className="bi bi-check-circle-fill"></i>
-                      Cumque nihil impedit quo
+                      Priority support & maintenance
                     </li>
                     <li>
                       <i className="bi bi-check-circle-fill"></i>
-                      Maxime placeat facere possimus
+                      Dedicated account manager
                     </li>
                   </ul>
 
-                  <a href="#" className="btn btn-primary">
+                  <a className="btn btn-primary">
                     Buy Now
                     <i className="bi bi-arrow-right"></i>
                   </a>
@@ -1008,10 +932,10 @@ export default function Main() {
                 <div className="card-content">
                   <h3>Still Have Questions?</h3>
                   <p>
-                    Vestibulum ante ipsum primis in faucibus orci luctus et
-                    ultrices posuere cubilia Curae; Donec velit neque, auctor
-                    sit amet aliquam vel, ullamcorper sit amet ligula.
-                    Vestibulum ac diam sit amet quam vehicula elementum.
+                    We’re always ready to assist you with any queries about our
+                    services or process. Feel free to reach out — our team will
+                    ensure your questions are answered with clarity and
+                    professional support.
                   </p>
                   <div className="contact-options">
                     <a href="#" className="contact-option">
@@ -1022,6 +946,17 @@ export default function Main() {
                       <i className="bi bi-chat-dots"></i>
                       <span>Live Chat</span>
                     </a>
+
+                    {/* <a
+                      href="https://wa.me/923167013172?text=Hi%2C%20I%27d%20like%20to%20know%20more!"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="contact-option"
+                    >
+                      <i className="bi bi-whatsapp"></i>
+                      <span>WhatsApp Chat</span>
+                    </a> */}
+
                     <a href="#" className="contact-option">
                       <i className="bi bi-telephone"></i>
                       <span>Call Us</span>
@@ -1034,16 +969,65 @@ export default function Main() {
             <div className="col-lg-6">
               <Accordion defaultActiveKey="0" flush>
                 <Accordion.Item eventKey="0">
-                  <Accordion.Header>Vivamus suscipit tortor eget felis porttitor volutpat?</Accordion.Header>
-                  <Accordion.Body>Answer 1</Accordion.Body>
+                  <Accordion.Header>
+                    <h5>How does your agency approach new digital projects?</h5>
+                  </Accordion.Header>
+                  <Accordion.Body>
+                    We begin with in-depth discovery to understand your goals.
+                    Our team then tailors strategies that align with your brand.
+                    Every step is transparent, collaborative, and focused on
+                    achieving measurable success.
+                  </Accordion.Body>
                 </Accordion.Item>
                 <Accordion.Item eventKey="1">
-                  <Accordion.Header>Question 1?</Accordion.Header>
-                  <Accordion.Body>Answer 1</Accordion.Body>
+                  <Accordion.Header>
+                    <h5>
+                      What makes your design process unique and effective?
+                    </h5>
+                  </Accordion.Header>
+                  <Accordion.Body>
+                    Our design approach combines creativity with usability. We
+                    focus on clean visuals, seamless navigation, and brand
+                    consistency. Each design decision supports user experience
+                    and business impact.
+                  </Accordion.Body>
                 </Accordion.Item>
                 <Accordion.Item eventKey="2">
-                  <Accordion.Header>Question 1?</Accordion.Header>
-                  <Accordion.Body>Answer 1</Accordion.Body>
+                  <Accordion.Header>
+                    <h5>
+                      Do you offer custom website development or use templates?
+                    </h5>
+                  </Accordion.Header>
+                  <Accordion.Body>
+                    We build fully custom solutions tailored to your needs.
+                    While we can work with templates, most clients prefer a
+                    unique design that reflects their brand and provides better
+                    scalability and performance.
+                  </Accordion.Body>
+                </Accordion.Item>
+                <Accordion.Item eventKey="3">
+                  <Accordion.Header>
+                    <h5>
+                      How do you ensure the success of marketing campaigns?
+                    </h5>
+                  </Accordion.Header>
+                  <Accordion.Body>
+                    We use data-driven strategies, market research, and creative
+                    execution. Campaigns are monitored, optimized, and adjusted
+                    in real-time to ensure they deliver traffic, engagement, and
+                    ROI.
+                  </Accordion.Body>
+                </Accordion.Item>
+                <Accordion.Item eventKey="4">
+                  <Accordion.Header>
+                    <h5>Can you help redesign an existing outdated website?</h5>
+                  </Accordion.Header>
+                  <Accordion.Body>
+                    Absolutely. We specialize in transforming old websites into
+                    modern, responsive platforms that reflect current trends.
+                    Our redesigns focus on aesthetics, functionality, and
+                    conversion improvements.
+                  </Accordion.Body>
                 </Accordion.Item>
               </Accordion>
             </div>
@@ -1056,10 +1040,7 @@ export default function Main() {
         {/* <!-- Section Title --> */}
         <div className="container section-title">
           <h2>Team</h2>
-          <p>
-            Necessitatibus eius consequatur ex aliquid fuga eum quidem sint
-            consectetur velit
-          </p>
+          <p>Meet the Experts Powering Your Success Every Step of the Way</p>
         </div>
 
         <div className="container">
@@ -1074,21 +1055,20 @@ export default function Main() {
                   />
                   <div className="team-overlay">
                     <p>
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                      Nulla quam velit, vulputate eu pharetra nec, mattis ac
-                      neque.
+                      Leads visual storytelling and brand vision, crafting
+                      unique designs that leave a lasting impact.
                     </p>
                     <div className="team-social">
-                      <a href="">
+                      <a>
                         <i className="bi bi-twitter-x"></i>
                       </a>
-                      <a href="">
+                      <a>
                         <i className="bi bi-facebook"></i>
                       </a>
-                      <a href="">
+                      <a>
                         <i className="bi bi-instagram"></i>
                       </a>
-                      <a href="">
+                      <a>
                         <i className="bi bi-linkedin"></i>
                       </a>
                     </div>
@@ -1111,20 +1091,20 @@ export default function Main() {
                   />
                   <div className="team-overlay">
                     <p>
-                      Aliquam tincidunt mauris eu risus. Vestibulum auctor
-                      dapibus neque. Nunc dignissim risus id metus.
+                      Builds robust, scalable web solutions with clean code and
+                      modern frameworks to ensure performance.
                     </p>
                     <div className="team-social">
-                      <a href="">
+                      <a>
                         <i className="bi bi-twitter-x"></i>
                       </a>
-                      <a href="">
+                      <a>
                         <i className="bi bi-facebook"></i>
                       </a>
-                      <a href="">
+                      <a>
                         <i className="bi bi-instagram"></i>
                       </a>
-                      <a href="">
+                      <a>
                         <i className="bi bi-linkedin"></i>
                       </a>
                     </div>
@@ -1147,20 +1127,20 @@ export default function Main() {
                   />
                   <div className="team-overlay">
                     <p>
-                      Cras ornare tristique elit. Integer in dui quis est
-                      placerat ornare. Phasellus a lacus a risus.
+                      Designs intuitive user experiences and seamless interfaces
+                      that enhance usability and brand identity.
                     </p>
                     <div className="team-social">
-                      <a href="">
+                      <a>
                         <i className="bi bi-twitter-x"></i>
                       </a>
-                      <a href="">
+                      <a>
                         <i className="bi bi-facebook"></i>
                       </a>
-                      <a href="">
+                      <a>
                         <i className="bi bi-instagram"></i>
                       </a>
-                      <a href="">
+                      <a>
                         <i className="bi bi-linkedin"></i>
                       </a>
                     </div>
@@ -1183,20 +1163,20 @@ export default function Main() {
                   />
                   <div className="team-overlay">
                     <p>
-                      Pellentesque habitant morbi tristique senectus et netus et
-                      malesuada fames ac turpis egestas.
+                      Specializes in digital growth strategies, creating
+                      impactful campaigns that drive real business results.
                     </p>
                     <div className="team-social">
-                      <a href="">
+                      <a>
                         <i className="bi bi-twitter-x"></i>
                       </a>
-                      <a href="">
+                      <a>
                         <i className="bi bi-facebook"></i>
                       </a>
-                      <a href="">
+                      <a>
                         <i className="bi bi-instagram"></i>
                       </a>
-                      <a href="">
+                      <a>
                         <i className="bi bi-linkedin"></i>
                       </a>
                     </div>
@@ -1213,209 +1193,51 @@ export default function Main() {
       </section>
 
       {/* <!-- Testimonials Section --> */}
-      <section id="testimonials" className="testimonials section">
-        {/* <!-- Section Title --> */}
-        <div className="container section-title">
-          <h2>Testimonials</h2>
-          <p>
-            Necessitatibus eius consequatur ex aliquid fuga eum quidem sint
-            consectetur velit
-          </p>
-        </div>
-
-        <div className="container">
-          {/* <div className="testimonials-slider swiper init-swiper">
-          <script type="application/json" className="swiper-config">
-            {
-              "loop": true,
-              "speed": 800,
-              "autoplay": {
-                "delay": 5000
-              },
-              "slidesPerView": 1,
-              "spaceBetween": 30,
-              "pagination": {
-                "el": ".swiper-pagination",
-                "type": "bullets",
-                "clickable": true
-              },
-              "breakpoints": {
-                "768": {
-                  "slidesPerView": 2
-                },
-                "1200": {
-                  "slidesPerView": 3
-                }
-              }
-            }
-          </script>
-          <div className="swiper-wrapper">
-            <div className="swiper-slide">
+      <div className="container testimonial-section">
+        <Swiper
+          className="testimonials-slider"
+          modules={[Autoplay, Pagination]}
+          loop={true}
+          speed={800}
+          autoplay={{ delay: 3000 }}
+          // autoplay={false}
+          slidesPerView={1}
+          spaceBetween={30}
+          pagination={{ clickable: true }}
+          breakpoints={{
+            768: { slidesPerView: 2 },
+            1200: { slidesPerView: 3 },
+          }}
+        >
+          {testimonials.map((testimonial, index) => (
+            <SwiperSlide key={index}>
               <div className="testimonial-card">
                 <div className="testimonial-content">
                   <p>
                     <i className="bi bi-quote quote-icon"></i>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                    {testimonial.text}
                   </p>
                 </div>
                 <div className="testimonial-profile">
                   <div className="rating">
-                    <i className="bi bi-star-fill"></i>
-                    <i className="bi bi-star-fill"></i>
-                    <i className="bi bi-star-fill"></i>
-                    <i className="bi bi-star-fill"></i>
-                    <i className="bi bi-star-fill"></i>
+                    {Array.from({ length: 5 }).map((_, i) => (
+                      <i key={i} className="bi bi-star-fill"></i>
+                    ))}
                   </div>
-                  <div className="profile-info">
-                    <img src="/img/person/person-m-8.webp" alt="Profile Image" />
+                  <div className="profile-info d-flex align-items-center">
+                    <img src={testimonial.image} alt="Profile" />
                     <div>
-                      <h3>Robert Johnson</h3>
-                      <h4>Marketing Director</h4>
+                      <h3>{testimonial.name}</h3>
+                      <h4>{testimonial.title}</h4>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
-
-            <div className="swiper-slide">
-              <div className="testimonial-card">
-                <div className="testimonial-content">
-                  <p>
-                    <i className="bi bi-quote quote-icon"></i>
-                    Proin iaculis purus consequat sem cure digni ssim donec porttitora entum suscipit rhoncus. Accusantium quam, ultricies eget id, aliquam eget nibh et maecenas aliquam.
-                  </p>
-                </div>
-                <div className="testimonial-profile">
-                  <div className="rating">
-                    <i className="bi bi-star-fill"></i>
-                    <i className="bi bi-star-fill"></i>
-                    <i className="bi bi-star-fill"></i>
-                    <i className="bi bi-star-fill"></i>
-                    <i className="bi bi-star-fill"></i>
-                  </div>
-                  <div className="profile-info">
-                    <img src="/img/person/person-f-3.webp" alt="Profile Image" />
-                    <div>
-                      <h3>Lisa Williams</h3>
-                      <h4>Product Manager</h4>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="swiper-slide">
-              <div className="testimonial-card">
-                <div className="testimonial-content">
-                  <p>
-                    <i className="bi bi-quote quote-icon"></i>
-                    Enim nisi quem export duis labore cillum quae magna enim sint quorum nulla quem veniam duis minim tempor labore quem eram duis noster aute amet eram.
-                  </p>
-                </div>
-                <div className="testimonial-profile">
-                  <div className="rating">
-                    <i className="bi bi-star-fill"></i>
-                    <i className="bi bi-star-fill"></i>
-                    <i className="bi bi-star-fill"></i>
-                    <i className="bi bi-star-fill"></i>
-                    <i className="bi bi-star-fill"></i>
-                  </div>
-                  <div className="profile-info">
-                    <img src="/img/person/person-f-10.webp" alt="Profile Image" />
-                    <div>
-                      <h3>Emma Parker</h3>
-                      <h4>UX Designer</h4>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="swiper-slide">
-              <div className="testimonial-card">
-                <div className="testimonial-content">
-                  <p>
-                    <i className="bi bi-quote quote-icon"></i>
-                    Fugiat enim eram quae cillum dolore dolor amet nulla culpa multos export minim fugiat minim velit minim dolor enim duis veniam ipsum anim magna sunt elit.
-                  </p>
-                </div>
-                <div className="testimonial-profile">
-                  <div className="rating">
-                    <i className="bi bi-star-fill"></i>
-                    <i className="bi bi-star-fill"></i>
-                    <i className="bi bi-star-fill"></i>
-                    <i className="bi bi-star-fill"></i>
-                    <i className="bi bi-star-fill"></i>
-                  </div>
-                  <div className="profile-info">
-                    <img src="/img/person/person-m-5.webp" alt="Profile Image" />
-                    <div>
-                      <h3>David Miller</h3>
-                      <h4>Senior Developer</h4>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="swiper-slide">
-              <div className="testimonial-card">
-                <div className="testimonial-content">
-                  <p>
-                    <i className="bi bi-quote quote-icon"></i>
-                    Quis quorum aliqua sint quem legam fore sunt eram irure aliqua veniam tempor noster veniam enim culpa labore duis sunt culpa nulla illum cillum fugiat.
-                  </p>
-                </div>
-                <div className="testimonial-profile">
-                  <div className="rating">
-                    <i className="bi bi-star-fill"></i>
-                    <i className="bi bi-star-fill"></i>
-                    <i className="bi bi-star-fill"></i>
-                    <i className="bi bi-star-fill"></i>
-                    <i className="bi bi-star-fill"></i>
-                  </div>
-                  <div className="profile-info">
-                    <img src="/img/person/person-m-2.webp" alt="Profile Image" />
-                    <div>
-                      <h3>Michael Davis</h3>
-                      <h4>CEO &amp; Founder</h4>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="swiper-slide">
-              <div className="testimonial-card">
-                <div className="testimonial-content">
-                  <p>
-                    <i className="bi bi-quote quote-icon"></i>
-                    Eius ipsam praesentium dolor quaerat inventore rerum odio. Quos laudantium adipisci eius. Accusamus qui iste cupiditate sed temporibus est aspernatur.
-                  </p>
-                </div>
-                <div className="testimonial-profile">
-                  <div className="rating">
-                    <i className="bi bi-star-fill"></i>
-                    <i className="bi bi-star-fill"></i>
-                    <i className="bi bi-star-fill"></i>
-                    <i className="bi bi-star-fill"></i>
-                    <i className="bi bi-star-fill"></i>
-                  </div>
-                  <div className="profile-info">
-                    <img src="/img/person/person-f-7.webp" alt="Profile Image" />
-                    <div>
-                      <h3>Sarah Thompson</h3>
-                      <h4>Art Director</h4>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+            </SwiperSlide>
+          ))}
           <div className="swiper-pagination"></div>
-        </div> */}
-        </div>
-      </section>
+        </Swiper>
+      </div>
 
       {/* <!-- Contact Section --> */}
       <section id="contact" className="contact section">
@@ -1423,8 +1245,10 @@ export default function Main() {
         <div className="container section-title">
           <h2>Contact</h2>
           <p>
-            Necessitatibus eius consequatur ex aliquid fuga eum quidem sint
-            consectetur velit
+            <p>
+              Let’s connect and discuss how our agency can help you grow and
+              elevate your brand today.
+            </p>
           </p>
         </div>
 
@@ -1436,7 +1260,7 @@ export default function Main() {
                   <i className="bi bi-geo-alt"></i>
                 </div>
                 <h3>Our Address</h3>
-                <p>2847 Rainbow Road, Springfield, IL 62701, USA</p>
+                <p>Faisalabad, Punjab 38000, Pakistan</p>
               </div>
             </div>
 
@@ -1447,9 +1271,9 @@ export default function Main() {
                 </div>
                 <h3>Contact Number</h3>
                 <p>
-                  Mobile: +1 (555) 123-4567
+                  Mobile: +92 316 7013172
                   <br />
-                  Email: info@example.com
+                  Email: info@wpcorex.com
                 </p>
               </div>
             </div>
@@ -1459,12 +1283,8 @@ export default function Main() {
                 <div className="icon-box">
                   <i className="bi bi-clock"></i>
                 </div>
-                <h3>Opening Hour</h3>
-                <p>
-                  Monday - Saturday: 9:00 - 18:00
-                  <br />
-                  Sunday: Closed
-                </p>
+                <h3>We're Open</h3>
+                <p>A bit friendlier and less formal.</p>
               </div>
             </div>
           </div>
@@ -1473,10 +1293,10 @@ export default function Main() {
             <div className="col-lg-12">
               <div className="form-wrapper">
                 <form
-                  action="forms/contact.php"
-                  method="post"
-                  role="form"
-                  className="php-email-form"
+                // action="forms/contact.php"
+                // method="post"
+                // role="form"
+                // className="php-email-form"
                 >
                   <div className="row">
                     <div className="col-md-6 form-group">
@@ -1555,15 +1375,15 @@ export default function Main() {
                         ></textarea>
                       </div>
                     </div>
-                    <div className="my-3">
+                    {/* <div className="my-3">
                       <div className="loading">Loading</div>
                       <div className="error-message"></div>
                       <div className="sent-message">
                         Your message has been sent. Thank you!
                       </div>
-                    </div>
-                    <div className="text-center">
-                      <button type="submit">Submit Message</button>
+                    </div> */}
+                    <div className="text-center mt-5">
+                      <button>Submit Message</button>
                     </div>
                   </div>
                 </form>
